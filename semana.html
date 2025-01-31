@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,25 +41,22 @@
         .header-buttons a {
             text-decoration: none;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 12px;
             background-color: #007bff;
             border-radius: 5px;
-            margin-left: 10px;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            margin-left: 5px;
         }
 
         .header-buttons a:hover {
             background-color: #0056b3;
         }
 
-        /* Estilos de los formularios */
-        textarea,
-        input,
-        select,
-        button {
+        /* Estilos del área de ejercicios */
+        textarea {
             width: 90%;
-            max-width: 600px;
-            margin: 10px 0;
+            max-width: 800px;
+            height: 200px; /* Aumentado */
             padding: 10px;
             font-family: monospace;
             font-size: 16px;
@@ -70,16 +66,31 @@
             box-sizing: border-box;
         }
 
-        textarea {
-            height: 150px;
-            white-space: pre-wrap;
-            overflow-y: auto;
-            text-align: left;
+        input {
+            width: 90%;
+            max-width: 400px;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-sizing: border-box;
         }
 
-        button,
-        select {
-            font-size: 1rem;
+        /* Botones en una sola línea */
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        button, select {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
 
@@ -97,60 +108,31 @@
             color: white;
         }
 
+        /* Consola */
         iframe {
             width: 90%;
-            height: 400px;
+            max-width: 800px;
+            height: 450px; /* Aumentado */
             margin: 20px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
         }
 
-        /* Media query para pantallas pequeñas */
+        /* Responsive */
         @media screen and (max-width: 600px) {
             header h1 {
                 font-size: 1.2rem;
             }
 
-            .header-buttons a {
+            .header-buttons a, button, select {
                 font-size: 0.8rem;
-                padding: 8px 16px;
-            }
-
-            button,
-            select {
-                font-size: 0.9rem;
-                padding: 8px 16px;
+                padding: 6px 10px;
             }
 
             textarea {
                 font-size: 14px;
-            }
-
-            iframe {
-                height: 300px;
-            }
-        }
-
-        /* Media query para tabletas y pantallas medianas */
-        @media screen and (min-width: 601px) and (max-width: 1024px) {
-            header h1 {
-                font-size: 1.3rem;
-            }
-
-            .header-buttons a {
-                font-size: 1rem;
-                padding: 10px 20px;
-            }
-
-            button,
-            select {
-                font-size: 1rem;
-                padding: 10px 20px;
-            }
-
-            textarea {
-                font-size: 16px;
+                height: 180px;
             }
 
             iframe {
@@ -159,7 +141,6 @@
         }
     </style>
 </head>
-
 <body>
     <header>
         <h1>Ejercicio de la Semana</h1>
@@ -171,22 +152,21 @@
 
     <textarea id="ejercicio" placeholder="Escribe el ejercicio aquí..."></textarea>
     <input type="password" id="clave" placeholder="Ingresa la contraseña para guardar">
-    <button onclick="guardarEjercicio()">Guardar Ejercicio</button>
 
-    <h3>Selecciona el lenguaje:</h3>
-    <select id="lenguaje">
-        <option value="python">Python</option>
-        <option value="cpp">C++</option>
-    </select>
-    <button onclick="abrirConsola()">Abrir Consola</button>
+    <div class="botones">
+        <button onclick="guardarEjercicio()">Guardar</button>
+        <select id="lenguaje">
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+        </select>
+        <button onclick="abrirConsola()">Abrir Consola</button>
+    </div>
 
     <iframe id="consola"></iframe>
 
     <script>
-        // Clave oculta mediante una combinación numérica
         const claveOfuscada = String.fromCharCode(49, 50, 51, 52); // "1234"
 
-        // Cargar el ejercicio guardado al abrir la página
         window.onload = function () {
             let ejercicioGuardado = localStorage.getItem('ejercicio');
             if (ejercicioGuardado) {
@@ -215,5 +195,4 @@
         }
     </script>
 </body>
-
 </html>
