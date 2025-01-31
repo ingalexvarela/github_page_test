@@ -167,15 +167,9 @@
 
             if (language === 'python') {
                 iframe.src = `https://onecompiler.com/embed/python?code=${encodedCode}`;
-                // Ejecutar el código en la consola (solo para Python)
-                try {
-                    eval(code);
-                } catch (e) {
-                    console.error("Error al ejecutar el código Python:", e);
-                }
+                // ❌ Se eliminó eval(code) para evitar el problema con print()
             } else {
                 iframe.src = `https://onecompiler.com/embed/cpp?code=${encodedCode}`;
-                // Mostrar el código C++ en la consola
                 console.log("Código C++:\n", code);
             }
         }
