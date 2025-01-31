@@ -27,7 +27,6 @@
 
         textarea {
             width: 90%;
-            height: 150px;
             margin: 10px 0;
             padding: 10px;
             font-family: monospace;
@@ -121,6 +120,33 @@
                 height: 400px;
             }
         }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #28a745;
+        }
+
+        .navbar a:hover {
+            background-color: #218838;
+        }
+
+        /* Ocultar el botón que lleva a editor.html */
+        #hide-editor-btn {
+            display: none;
+        }
     </style>
 </head>
 
@@ -128,6 +154,15 @@
     <header>
         <h1>Editor de Código</h1>
     </header>
+
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="semana.html">Ejercicio de la semana</a>
+        <!-- Este botón estará oculto -->
+        <a href="editor.html" id="hide-editor-btn">Editor</a>
+    </div>
+
     <textarea id="python_code" placeholder="Escribe tu código Python aquí..."></textarea>
     <textarea id="cpp_code" placeholder="Escribe tu código C++ aquí..."></textarea>
     <button onclick="saveCode()">Guardar Código</button>
@@ -167,9 +202,15 @@
 
             if (language === 'python') {
                 iframe.src = `https://onecompiler.com/embed/python?code=${encodedCode}`;
-                // ❌ Se eliminó eval(code) para evitar el problema con print()
+                // Ejecutar el código en la consola (solo para Python)
+                try {
+                    eval(code);
+                } catch (e) {
+                    console.error("Error al ejecutar el código Python:", e);
+                }
             } else {
                 iframe.src = `https://onecompiler.com/embed/cpp?code=${encodedCode}`;
+                // Mostrar el código C++ en la consola
                 console.log("Código C++:\n", code);
             }
         }
